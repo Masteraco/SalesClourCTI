@@ -47,7 +47,7 @@ var comm_connector = {
 	 * serverUrl - This defines the location of your service provider.
 	 * serverLaunchCallback - This callback object must be invoked with a value of true once the connector has verified communications with the service provider.
 	 */
-	launchServer : function(downloadLocation, serverUrl, serverLaunchCallback){
+	launchServer : function(https://docs.oracle.com/javase/tutorialJWS/samples/deployment/dynamictree_webstartJWSProject/dynamictree_webstart.jnlp, serverUrl, serverLaunchCallback){
 		console.info("comm_connector.launchServer(" + downloadLocation + ", " + serverUrl + ", <serverLaunchCallback>)");
 		//if needed perform steps needed to launch connectorserver
 		//invoke callback
