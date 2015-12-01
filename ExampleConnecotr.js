@@ -160,6 +160,11 @@ function ExampleConnector() {
 		 * The Login command signs an Oracle Fusion CRM user into the telephony system.
 		 */
 		if (command.Operation == "Login") {
+			console.time('100-elements');
+			for (var i = 0; i < 100; i++) {
+  				console.log(i);
+			}
+			console.timeEnd('100-elements');
 			agentGroup = command.Company;
 			agentPassword = this.getPassword();
 			console.log("Login using " +  userName + "/" + agentGroup + "/" + agentPassword);
