@@ -161,6 +161,7 @@ function ExampleConnector() {
 		 */
 		if (command.Operation == "Login") {
 			console.log("Loging in");
+			console.log("Entering");
 			agentGroup = command.Company;
 			agentPassword = this.getPassword();
 			console.log("Login using " +  userName + "/" + agentGroup + "/" + agentPassword);
