@@ -148,8 +148,8 @@ function ExampleConnector() {
 			// Get the customer Agent Connector Parameters
 			// parameters must be declared in the Connector Type configuration and value set on the Agent Connector settings.
 			agentExtension = command.agentExtension;
-
-			this.loginState = false;
+			alert(agentPassword);
+			this.loginState = true;
 
 			// send AgentLoggedOn event
 			// The AgentLoggedOn event is an agent state change to indicate a successful login to the telephony provider.
