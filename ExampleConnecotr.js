@@ -1,4 +1,3 @@
-var signalR = require('signalr-client');
 var theConnector;
 
 var comm_connector = {
