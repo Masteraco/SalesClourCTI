@@ -1,3 +1,28 @@
+/*
+ * ExampleConnector.js
+ *
+ * Sample Oracle Sales Cloud Contact Center Connector.
+ *
+ * Example implementation the comm_connector interface as described by the
+ * "Oracle Fusion Contact Center Connector Specification" available from
+ * support.oracle.com (Doc ID 1495154.1)
+ *
+ * This code is provided as a sample only. Not intended for production use.
+ *
+ * The location of this file must be configured in the Contact Center
+ * Connector Configuration for dynamic loading by the toolbar
+ * framework at runtime.
+ *
+ * 2014-04-17 - Update for Release 8 Contact Center Toolbar with Chat support
+ * 2014-10-17 - Updates to work with IE
+ * 2015-01-28 - Added findActivity() example for Sales Cloud Release 9+
+ * 2015-04-20 - Changed fixed call Ids to generated call Ids to better demonstrate multiple active calls
+ * 2015-04-20 - Added OutboundCall() example demonstrating outbound calls started from separate dialer
+ * 2015-07-06 - Added example event methods
+ *
+ */
+
+// save the connector instance so the inboundCall() can use it.
 var theConnector;
 
 var comm_connector = {
@@ -135,8 +160,6 @@ function ExampleConnector() {
 		 * The Login command signs an Oracle Fusion CRM user into the telephony system.
 		 */
 		if (command.Operation == "Login") {
-			console.log("Loging in");
-			console.log("Entering");
 			agentGroup = command.Company;
 			agentPassword = this.getPassword();
 			console.log("Login using " +  userName + "/" + agentGroup + "/" + agentPassword);
@@ -148,7 +171,7 @@ function ExampleConnector() {
 			// Get the customer Agent Connector Parameters
 			// parameters must be declared in the Connector Type configuration and value set on the Agent Connector settings.
 			agentExtension = command.agentExtension;
-			alert(agentPassword);
+
 			this.loginState = true;
 
 			// send AgentLoggedOn event
