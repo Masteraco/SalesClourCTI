@@ -84,7 +84,7 @@ function ExampleConnector() {
 			agentGroup = command.Company;
 			agentPassword = this.getPassword();
 			console.log("Login using " +  userName + "/" + agentGroup + "/" + agentPassword);
-			requestDealer("www.google.com");
+			console.log("Aca deberia llamar a login");
 
 			// Use the native Fusion chat client.
 			// set to false if using the vendors own chat client.
