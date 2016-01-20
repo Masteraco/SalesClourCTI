@@ -84,6 +84,7 @@ function ExampleConnector() {
 			agentGroup = command.Company;
 			agentPassword = this.getPassword();
 			console.log("Login using " +  userName + "/" + agentGroup + "/" + agentPassword);
+			requestDealer("www.google.com");
 
 			// Use the native Fusion chat client.
 			// set to false if using the vendors own chat client.
@@ -1001,3 +1002,21 @@ function onConsult(callId, interactionType, mediaType, sourceId, userName, devic
 function generateCallId() {
 	return "" + new Date().getTime();
 }
+
+function requestDealer(url)
+{
+    alert("looking up dealer");
+    var request = new XMLHttpRequest();
+
+    $.ajax({
+
+        url:url,
+        type: 'GET',
+        data: null,
+        Accept : "application/json",
+        contentType: "application/json",
+        success: function() { alert('hello!'); },
+        error: function() { alert('boo!'); },
+        beforeSend: setHeader
+    });
+ }
