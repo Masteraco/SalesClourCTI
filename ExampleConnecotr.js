@@ -1,56 +1,16 @@
-/*
- * ExampleConnector.js
- *
- * Sample Oracle Sales Cloud Contact Center Connector.
- *
- * Example implementation the comm_connector interface as described by the
- * "Oracle Fusion Contact Center Connector Specification" available from
- * support.oracle.com (Doc ID 1495154.1)
- *
- * This code is provided as a sample only. Not intended for production use.
- *
- * The location of this file must be configured in the Contact Center
- * Connector Configuration for dynamic loading by the toolbar
- * framework at runtime.
- *
- * 2014-04-17 - Update for Release 8 Contact Center Toolbar with Chat support
- * 2014-10-17 - Updates to work with IE
- * 2015-01-28 - Added findActivity() example for Sales Cloud Release 9+
- * 2015-04-20 - Changed fixed call Ids to generated call Ids to better demonstrate multiple active calls
- * 2015-04-20 - Added OutboundCall() example demonstrating outbound calls started from separate dialer
- * 2015-07-06 - Added example event methods
- *
- */
-
-// save the connector instance so the inboundCall() can use it.
+var signalR = require('signalr-client');
 var theConnector;
 
 var comm_connector = {
 
-	/**
-	 * This must return a handle to an instance of the custom connector object.
-	 */
 	getConnector : function(){
 	 	console.info("comm_connector.getConnector()");
 		theConnector = new ExampleConnector();
 		return theConnector;
 	},
 
-
-	/**
-	 * Allow the connector to start up any processes required for communication purposes.
-	 * When the connector is able to establish communications with the service provider
-	 * it should invoke the serverLaunchCallback with a value of true.
-	 * This must be implemented in order for the logon command to be executed.
-	 *
-	 * downloadLocation - The location of a jnlp file if a Java Web Start Application is required.
-	 * serverUrl - This defines the location of your service provider.
-	 * serverLaunchCallback - This callback object must be invoked with a value of true once the connector has verified communications with the service provider.
-	 */
 	launchServer : function(downloadLocation, serverUrl, serverLaunchCallback){
 		console.info("comm_connector.launchServer(" + downloadLocation + ", " + serverUrl + ", <serverLaunchCallback>)");
-		//if needed perform steps needed to launch connectorserver
-		//invoke callback
 		serverUp = true;
 		serverLaunchCallback(serverUp);
 	},
@@ -64,41 +24,17 @@ var comm_connector = {
 
 function ExampleConnector() {
 
-	// Local variables
 	var callbackMethods;
 	var connectionState = false;
 	var loginState = false;
 	var conferenceState = false;
 
-	/**
-	 * Establishes a connection with the remote service provider.
-	 * Note: this is not to be confused with the Login command specified in the
-	 * Command API which actually logs an agent into the provider system. Once a
-	 * connection is established the Connector should establish a channel for receiving
-	 * events.
-	 *
-	 * URL - location of remote service provider
-	 * username - user entered string for identifying the user to the third party media provider.
-	 * password - encrypted password string, refer to the password implications section.
-	 * options - contains the OnOpen, OnClose and OnMessage callback functions.
-	 *
-	 * The OnMessage should be invoked whenever an event needs sent to the Toolbar Framework.
-	 * Please refer to the Event API for proper formatting of the events.
-	 *
-	 * (OnOpen, OnMessage, OnClose will be invoked if passed in as part of parameters)
-	 * OnOpen - when connection is established (currently a no-op)
-	 * OnMessage - for any message to be delivered to the client (currently this
-	 * method is used in lieu of OnOpen and OnClose and processing is based on
-	 * message contents
-	 * OnClose - when connection is closed. (currently a no-op)
-	 */
 	this.logon = function (serverURL, userName, password, callbackMethods){
 
 		console.info("ExampleConnector.logon(" + serverURL + ", " + userName + ", " + password + ", " + callbackMethods + ")");
 		console.log(callbackMethods);
 		this.callbackMethods = callbackMethods;
 
-		// Indicate a successful connection to service provider based
 		this.connectionState = true;
 		var event = "login response ok";
 		var token = { reqType: "login", type: "response", msg: "ok", data: event };
@@ -107,35 +43,21 @@ function ExampleConnector() {
 
 	};
 
-	/**
-	 * Returns boolean true if the client is currently connected.
-	 */
 	this.isConnected = function (){
 		console.info("ExampleConnector.isConnected() " + this.connectionState);
 		return this.connectionState;
 	};
 
-	/**
-	 * Invoked following a browser refresh to determine if a re-login is required.
-	 * Returns boolean true if a new login must be made.
-	 */
 	this.getServerRestarted = function(){
 		console.info("ExampleConnector.getServerRestarted()");
 		return false;
 	};
 
-	/**
-	 * Terminates communications with the remote service provider
-	 */
 	this.logout = function(){
 		console.info("ExampleConnector.logout()");
 		this.loginState = false;
 	};
 
-	/**
-	 * Close connection with server and clean up any resources allocated by
-	 * the connector
-	 */
 	this.close = function(){
 		console.info("ExampleConnector.close()");
 		this.connectionState = false;
