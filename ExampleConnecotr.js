@@ -19,7 +19,7 @@
  * 2015-04-20 - Changed fixed call Ids to generated call Ids to better demonstrate multiple active calls
  * 2015-04-20 - Added OutboundCall() example demonstrating outbound calls started from separate dialer
  * 2015-07-06 - Added example event methods
- *
+ * Modified by Alfredo Torres
  */
 
 // save the connector instance so the inboundCall() can use it.
