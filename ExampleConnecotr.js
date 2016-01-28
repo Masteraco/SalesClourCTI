@@ -70,6 +70,7 @@ function ExampleConnector() {
 	var loginState = false;
 	var conferenceState = false;
 
+        console.info('Entering Example Conector');
 	/**
 	 * Establishes a connection with the remote service provider.
 	 * Note: this is not to be confused with the Login command specified in the
