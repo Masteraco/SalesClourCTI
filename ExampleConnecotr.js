@@ -97,8 +97,9 @@ function ExampleConnector() {
 
 		console.info("ExampleConnector.logon(" + serverURL + ", " + userName + ", " + password + ", " + callbackMethods + ")");
 		console.log(callbackMethods);
+		console.info("Here is where i call the CCA Login");
 		this.callbackMethods = callbackMethods;
-
+            
 		// Indicate a successful connection to service provider based
 		this.connectionState = true;
 		var event = "login response ok";
